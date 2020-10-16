@@ -1,0 +1,81 @@
+using System;
+
+namespace ConsoleApplication4
+{
+    internal class Program
+    {
+        public static void CellX(char ch1, char ch2, char ch3, char ch4, int cellX, int cellWidth) //количество ячеек
+        {
+            Console.Write(ch1);                                //1 знак строки
+
+            for (int fi = 1; fi <= cellX; fi++)                  //количество ячеек
+            {
+                for (int i = 1; i <= cellWidth; i++)
+                {
+                    Console.Write(ch4);
+                }
+                Console.Write(ch2);
+            }
+            
+            for (int i = 1; i <= cellWidth; i++)                        //последняя ячейка
+            {
+                Console.Write(ch4);
+            }
+            
+            Console.WriteLine(ch3);                                //последний знак строки
+
+        }
+
+        public static void CenterString(int cellH, int fieldW, int cellW)
+        {
+            for (int i = 1; i <= cellH -1; i++)
+            {
+                CellX('|', '|', '|', ' ', fieldW, cellW);
+            }
+        }
+        
+        public static void Spaces(int x, int y)
+        {
+            
+        }
+        public static void Main(string[] args)
+        {
+            int cellW = 1;
+            int fieldW = 5;
+            int cellH = 1;
+            int fieldH = 5;
+            
+            CellX('┌', '┬', '┐', '─', fieldW, cellW);
+            
+            for (int i = 1; i <= cellH -1; i++)
+            {
+                CellX('|', '|', '|', ' ', fieldW, cellW);
+            }
+
+            for (int fi = 1; fi <= fieldH; fi++)
+            {
+                for (int i = 1; i <= cellH - 1; i++)
+                {
+                    CellX('|', '|', '|', ' ', fieldW, cellW);
+                }
+            
+                CellX('├', '┼', '┤', '─', fieldW, cellW);
+                
+                for (int i = 1; i <= cellH - 1; i++)
+                {
+                    CellX('|', '|', '|', ' ', fieldW, cellW);
+                }
+            }
+            
+            for (int i = 1; i <= cellH - 1; i++)
+            {
+                CellX('|', '|', '|', ' ', fieldW, cellW);
+            }
+            
+            CellX('└', '┴', '┘', '─', fieldW, cellW);
+
+            //Field(2, 2);
+            //Spaces(10, 10);
+        }
+    }
+}
