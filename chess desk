@@ -4,11 +4,19 @@ namespace ConsoleApplication4
 {
     internal class Program
     {
-        public static void CellX(char ch1, char ch2, char ch3, char ch4, int cellX, int cellWidth) //количество ячеек
+        public static int cellW = 1;                 //ширина ячейки
+        public static int fieldW = 10;               //ширина поля   
+        public static int cellH = 0;                 //высота ячейки
+        public static int fieldH = 5;                //высота поля
+        public static int spaceX = 80;               //отступ слева
+        public static int spaceY = 10;               //отступ сверху
+        
+        public static void CellX(char ch1, char ch2, char ch3, char ch4, int fieldW, int cellWidth)
         {
+            Spaces(spaceX, 0);                              //отступ слева
             Console.Write(ch1);                                //1 знак строки
 
-            for (int fi = 1; fi <= cellX; fi++)                  //количество ячеек
+            for (int fi = 1; fi <= fieldW; fi++)               //количество ячеек
             {
                 for (int i = 1; i <= cellWidth; i++)
                 {
@@ -17,65 +25,50 @@ namespace ConsoleApplication4
                 Console.Write(ch2);
             }
             
-            for (int i = 1; i <= cellWidth; i++)                        //последняя ячейка
+            for (int i = 1; i <= cellWidth; i++)               //последняя ячейка
             {
                 Console.Write(ch4);
             }
             
-            Console.WriteLine(ch3);                                //последний знак строки
-
+            Console.WriteLine(ch3);                            //последний знак строки
         }
-
-        public static void CenterString(int cellH, int fieldW, int cellW)
+        //вывод строки
+        
+        public static void CellY()
         {
-            for (int i = 1; i <= cellH -1; i++)
+            for (int i = 1; i <= cellH; i++)
             {
                 CellX('|', '|', '|', ' ', fieldW, cellW);
             }
-        }
-        
+        }                 
+        //вывод нескольких строк
+
         public static void Spaces(int x, int y)
         {
-            
+            for (int i = 1; i <= y; i++)
+            {
+                Console.WriteLine(" ");
+            }
+
+            for (int i = 1; i <= x; i++)
+            {
+                Console.Write(' ');
+            }
         }
+        //отступы
+        
         public static void Main(string[] args)
         {
-            int cellW = 1;
-            int fieldW = 5;
-            int cellH = 1;
-            int fieldH = 5;
-            
-            CellX('┌', '┬', '┐', '─', fieldW, cellW);
-            
-            for (int i = 1; i <= cellH -1; i++)
-            {
-                CellX('|', '|', '|', ' ', fieldW, cellW);
-            }
+            Spaces(0, spaceY);                         //отступ сверху
 
+            CellX('┌', '┬', '┐', '─', fieldW, cellW);
+            CellY(); // |          |         |
             for (int fi = 1; fi <= fieldH; fi++)
             {
-                for (int i = 1; i <= cellH - 1; i++)
-                {
-                    CellX('|', '|', '|', ' ', fieldW, cellW);
-                }
-            
                 CellX('├', '┼', '┤', '─', fieldW, cellW);
-                
-                for (int i = 1; i <= cellH - 1; i++)
-                {
-                    CellX('|', '|', '|', ' ', fieldW, cellW);
-                }
+                CellY(); // |          |         |
             }
-            
-            for (int i = 1; i <= cellH - 1; i++)
-            {
-                CellX('|', '|', '|', ' ', fieldW, cellW);
-            }
-            
             CellX('└', '┴', '┘', '─', fieldW, cellW);
-
-            //Field(2, 2);
-            //Spaces(10, 10);
         }
     }
 }
